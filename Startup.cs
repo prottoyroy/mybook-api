@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using bookapi.Data;
+using bookapi.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +34,9 @@ namespace bookapi
 
             services.AddControllers();
             services.AddDbContext<AppDbContext>(options =>options.UseSqlServer(ConnectionString));
+            //configure services
+            // services.AddScoped<BooksService>();
+            services.AddTransient<BooksService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "bookapi", Version = "v1" });
