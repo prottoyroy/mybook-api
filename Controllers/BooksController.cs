@@ -20,5 +20,17 @@ namespace bookapi.Controllers
             _bookServie.AddBook(book);
             return Ok();
         }
+        [HttpGet("get-all-books")]
+        public IActionResult GetAllBooks()
+        {
+            var books =_bookServie.GetAllbooks();
+            return Ok(books);
+        }
+        [HttpGet("get-book-by-id/{id}")]
+        public IActionResult GetBookById(int id)
+        {
+            var book =_bookServie.GetBook(id);
+            return Ok(book);
+        }
     }
 }

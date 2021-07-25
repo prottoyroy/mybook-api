@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using bookapi.Data.Models;
 using bookapi.Data.ViewModels;
 
@@ -30,5 +32,18 @@ namespace bookapi.Data.Services
            _context.books.Add(_book);
            _context.SaveChanges();
         }
+        
+        public List<Book> GetAllbooks() =>_context.books.ToList();
+        public Book GetBook(int bookId) =>_context.books.FirstOrDefault(b =>b.Id ==bookId);
+
+        
+        // public List<Book> GetAllbooks()
+        // {
+        //     var allbooks = _context.books.ToList();
+        //     return allbooks;
+        // }
+           
+        
+        
     }
 }
