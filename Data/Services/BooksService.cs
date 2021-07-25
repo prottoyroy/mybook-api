@@ -36,7 +36,32 @@ namespace bookapi.Data.Services
         public List<Book> GetAllbooks() =>_context.books.ToList();
         public Book GetBook(int bookId) =>_context.books.FirstOrDefault(b =>b.Id ==bookId);
 
-        
+        public Book UpdateBook (int bookId,BookVM book)
+        {
+            var _book =_context.books.FirstOrDefault(b =>b.Id==bookId);
+            if(_book != null)
+            {
+                _book.Title =book.Title;
+                _book.Description=book.Description;
+                _book.IsRead =book.IsRead;
+                _book.DateRead=book.IsRead?book.DateRead.Value:null;
+                _book.Rate=book.IsRead?book.Rate.Value:null;
+                _book.Genre=book.Genre;
+                _book.Author=book.Author;
+                _book.CoverUrl=book.CoverUrl;
+                _context.SaveChanges();
+            }
+            return _book;
+        }
+        public void DeleteBook(int bookId)
+        {
+            var _book =_context.books.FirstOrDefault(b =>b.Id==bookId);
+            if(_book!=null)
+            {
+                _context.books.Remove(_book);
+                _context.SaveChanges();
+            }
+        }
         // public List<Book> GetAllbooks()
         // {
         //     var allbooks = _context.books.ToList();
