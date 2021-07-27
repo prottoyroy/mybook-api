@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace bookapi.Data.Models
 {
@@ -14,5 +15,10 @@ namespace bookapi.Data.Models
         public string Author { get; set; }
         public string CoverUrl { get; set; }
         public DateTime DateAdded { get; set; }
+        
+        //navigation properties
+        public int? PublishedId { get; set; }
+        public Publisher publisher{get;set;}
+        public List<Book_Author> Book_Authors{get;set;}
     }
 }

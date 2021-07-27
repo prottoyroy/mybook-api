@@ -13,9 +13,9 @@ namespace bookapi.Data
             using(var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                if(!context.books.Any())
+                if(!context.Books.Any())
                 {
-                    context.books.AddRange(
+                    context.Books.AddRange(
                         new Book
                     {
                         Title="1st book title",

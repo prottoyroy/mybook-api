@@ -29,16 +29,16 @@ namespace bookapi.Data.Services
                 DateAdded=DateTime.Now
                 
            };
-           _context.books.Add(_book);
+           _context.Books.Add(_book);
            _context.SaveChanges();
         }
         
-        public List<Book> GetAllbooks() =>_context.books.ToList();
-        public Book GetBook(int bookId) =>_context.books.FirstOrDefault(b =>b.Id ==bookId);
+        public List<Book> GetAllbooks() =>_context.Books.ToList();
+        public Book GetBook(int bookId) =>_context.Books.FirstOrDefault(b =>b.Id ==bookId);
 
         public Book UpdateBook (int bookId,BookVM book)
         {
-            var _book =_context.books.FirstOrDefault(b =>b.Id==bookId);
+            var _book =_context.Books.FirstOrDefault(b =>b.Id==bookId);
             if(_book != null)
             {
                 _book.Title =book.Title;
@@ -55,10 +55,10 @@ namespace bookapi.Data.Services
         }
         public void DeleteBook(int bookId)
         {
-            var _book =_context.books.FirstOrDefault(b =>b.Id==bookId);
+            var _book =_context.Books.FirstOrDefault(b =>b.Id==bookId);
             if(_book!=null)
             {
-                _context.books.Remove(_book);
+                _context.Books.Remove(_book);
                 _context.SaveChanges();
             }
         }
