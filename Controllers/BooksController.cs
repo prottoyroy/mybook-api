@@ -14,10 +14,10 @@ namespace bookapi.Controllers
             _bookServie = bookServie;
 
         }
-        [HttpPost("add-book")]
+        [HttpPost("add-book-with-author")]
         public IActionResult AddBook([FromBody] BookVM book)
         {
-            _bookServie.AddBook(book);
+            _bookServie.AddBookWithAuthor(book);
             return Ok();
         }
         [HttpGet("get-all-books")]

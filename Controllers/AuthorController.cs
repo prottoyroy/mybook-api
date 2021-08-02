@@ -20,5 +20,11 @@ namespace bookapi.Controllers
             _authorService.AddAuthor(authorVM);
             return Ok();
         }
+        [HttpGet("get-author-with-books-by-id/{id}")]
+        public IActionResult GetAuthorWithBooks(int id)
+        {
+            var response=_authorService.GetAuthorWithBookTitle(id);
+            return Ok(response);
+        }
     }
 }
