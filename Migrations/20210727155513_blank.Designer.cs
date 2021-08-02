@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using bookapi.Data;
 
 namespace bookapi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210727155513_blank")]
+    partial class blank
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,6 +43,9 @@ namespace bookapi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CoverUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -59,7 +64,7 @@ namespace bookapi.Migrations
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PublisherId")
+                    b.Property<int?>("PublishedId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Rate")
@@ -68,9 +73,12 @@ namespace bookapi.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("publisherId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PublisherId");
+                    b.HasIndex("publisherId");
 
                     b.ToTable("Books");
                 });
@@ -114,13 +122,11 @@ namespace bookapi.Migrations
 
             modelBuilder.Entity("bookapi.Data.Models.Book", b =>
                 {
-                    b.HasOne("bookapi.Data.Models.Publisher", "Publisher")
+                    b.HasOne("bookapi.Data.Models.Publisher", "publisher")
                         .WithMany("Books")
-                        .HasForeignKey("PublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("publisherId");
 
-                    b.Navigation("Publisher");
+                    b.Navigation("publisher");
                 });
 
             modelBuilder.Entity("bookapi.Data.Models.Book_Author", b =>

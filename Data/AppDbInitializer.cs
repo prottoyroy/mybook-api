@@ -24,7 +24,7 @@ namespace bookapi.Data
                         DateRead=DateTime.Now.AddDays(-10),
                         Rate=4,
                         Genre="Biography",
-                        Author="1st authore",
+                       
                         CoverUrl="https://...",
                         DateAdded =DateTime.Now
                     
@@ -37,7 +37,7 @@ namespace bookapi.Data
                         DateRead=DateTime.Now.AddDays(-10),
                         Rate=4,
                         Genre="Action",
-                        Author="2st authore",
+                      
                         CoverUrl="https://...",
                         DateAdded =DateTime.Now
                     
@@ -50,7 +50,7 @@ namespace bookapi.Data
                         DateRead=DateTime.Now.AddDays(-10),
                         Rate=4,
                         Genre="Biography",
-                        Author="1st authore",
+                       
                         CoverUrl="https://...",
                         DateAdded =DateTime.Now
                     
