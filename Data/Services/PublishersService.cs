@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using bookapi.Data.Models;
 using bookapi.Data.ViewModels;
@@ -35,6 +36,16 @@ namespace bookapi.Data.Services
 
             }).FirstOrDefault();
             return _publisher;
+        }
+
+        public void DeletePublisherByPublisherId(int id)
+        {
+            var _publisher = _context.Publishers.FirstOrDefault(n =>n.Id==id);
+            if(_publisher!=null)
+            {
+                _context.Remove(_publisher);
+                _context.SaveChanges();
+            }
         }
     }
 }
