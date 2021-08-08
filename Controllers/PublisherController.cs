@@ -1,3 +1,4 @@
+using System;
 using bookapi.Data.Services;
 using bookapi.Data.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -18,8 +19,17 @@ namespace bookapi.Controllers
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher(PublisherVM publisherVM)
         {
-            _publisherService.AddPublisher(publisherVM);
-            return Ok();
+           var newPublisher= _publisherService.AddPublisher(publisherVM);
+           return Created(nameof(AddPublisher),newPublisher);
+           // return Ok(newPublisher);
+        }
+         [HttpGet("get-publisher-by-id/{id}")]
+        public IActionResult GetPublisherById(int id)
+        {
+            var response =_publisherService.GetPublisherById(id);
+            if(response == null)
+            return NotFound();
+            return Ok(response);
         }
         [HttpGet("publisher-with-book-authors-by-id/{id}")]
         public IActionResult GetPublisherWithBookAuthors(int id)
@@ -30,8 +40,16 @@ namespace bookapi.Controllers
         [HttpDelete("delete-publisher-by-id/{id}")]
         public IActionResult DeletePublisher(int id)
         {
-            _publisherService.DeletePublisherByPublisherId(id);
-            return Ok();
+            try
+            {
+               _publisherService.DeletePublisherByPublisherId(id);
+                return Ok();
+            }
+            catch(Exception ex )
+            {
+                return BadRequest(ex.Message);
+            }
+            
         }
     }
 }

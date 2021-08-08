@@ -1,7 +1,9 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using bookapi.Data.Models;
 using bookapi.Data.ViewModels;
+
 
 namespace bookapi.Data.Services
 {
@@ -13,8 +15,9 @@ namespace bookapi.Data.Services
             _context = context;
 
         }
-         public void AddPublisher (PublisherVM publisherVM)
+         public Publisher AddPublisher (PublisherVM publisherVM)
         {
+            
             var _publisher = new Publisher()
             {
                 Name = publisherVM.Name
@@ -22,6 +25,7 @@ namespace bookapi.Data.Services
             };
            _context.Publishers.Add(_publisher);
            _context.SaveChanges();
+           return _publisher;
         }
         public PublisherWithBooksAndAuthorsVM GetPublisherWithBooksAndAuthors(int publisherId)
         {
@@ -38,14 +42,31 @@ namespace bookapi.Data.Services
             return _publisher;
         }
 
+        public Publisher GetPublisherById(int id)
+        {
+            var _publisher =_context.Publishers.FirstOrDefault(n =>n.Id==id);
+            return _publisher; 
+        }
+
         public void DeletePublisherByPublisherId(int id)
         {
+          
             var _publisher = _context.Publishers.FirstOrDefault(n =>n.Id==id);
             if(_publisher!=null)
             {
                 _context.Remove(_publisher);
                 _context.SaveChanges();
             }
+            else
+            {
+                throw new Exception($"The publisher with Id : {id} does not exist");
+            }
+        }
+        private bool stringStartsWithNumber( string name)
+        {
+            if(Regex.IsMatch(name,@"^\d")) return true;
+            return false;
+             
         }
     }
 }
